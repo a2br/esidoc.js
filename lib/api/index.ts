@@ -1,5 +1,15 @@
 type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
 
+type Facette =
+	| "support_groupe"
+	| "date_parution_annee"
+	| "auteurs"
+	| "types_nature"
+	| "emplacement";
+
+type strnum = `${number}`;
+type esinum = number | strnum;
+
 type FacetteSupportGroups = LiteralUnion<
 	"Livres" | "Revues, journaux, magazines" | "Sites internet" | "Vidéos"
 >;
@@ -99,10 +109,22 @@ interface Resultat {
 	image: string;
 }
 
-interface SearchQuery {}
+interface SearchReq {
+	requete: [
+		{
+			critere: "tous";
+			valeur: string;
+			operateur: "ET";
+		}
+	];
+	facettes: Facette[];
+	nb_resultats: esinum;
+	avis_federes: "1";
+	numero_premier_resultat: esinum;
+}
 
 interface SearchRes {
-	facettes?: Record<string, [category: string, quantity: number][]>;
+	facettes?: Record<Facette, [category: string, quantity: number][]>;
 	nb_resultats: number;
 	resultats: Resultat[];
 }
