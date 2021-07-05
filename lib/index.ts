@@ -16,11 +16,12 @@ export class Esidoc {
 			return true;
 		} else return false;
 	}
-	async query(query: T.Query) {
+	async search(query: T.Query): Promise<T.SearchRes> {
 		await this._refreshToken();
 		// build req from query
 		const req = M.buildQueryReq(query);
 		const res = await M.query(req, this.institution, this.token);
+		return res;
 	}
 }
 
