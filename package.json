@@ -1,6 +1,6 @@
 {
 	"name": "esidoc.js",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"description": "Simple JS client for Esidoc's private API",
 	"main": "index.js",
 	"scripts": {
