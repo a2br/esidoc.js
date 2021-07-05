@@ -1,23 +1,22 @@
 {
-  "name": "esidoc.js",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/node-fetch": "^2.5.10",
-    "@types/xml2js": "^0.4.9",
-    "eslint": "^7.30.0",
-    "prettier": "^2.3.2"
-  },
-  "dependencies": {
-    "jwt-decode": "^3.1.2",
-    "node-fetch": "^2.6.1",
-    "xml2js": "^0.4.23"
-  }
+	"name": "esidoc.js",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/node-fetch": "^2.5.10",
+		"@types/xml2js": "^0.4.9",
+		"eslint": "^7.30.0",
+		"prettier": "^2.3.2"
+	},
+	"dependencies": {
+		"jwt-decode": "^3.1.2",
+		"node-fetch": "^2.6.1"
+	}
 }

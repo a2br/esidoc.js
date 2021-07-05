@@ -11,9 +11,6 @@ export const allFacettes = [
 export type ElemOf<A extends readonly unknown[]> = A[number];
 export type Facette = ElemOf<typeof allFacettes>;
 
-export type strnum = `${number}`;
-export type esinum = number | strnum;
-
 export type FacetteSupportGroups = LiteralUnion<
 	"Livres" | "Revues, journaux, magazines" | "Sites internet" | "Vidéos"
 >;
@@ -146,9 +143,9 @@ export interface SearchReq {
 		}
 	];
 	facettes: Facette[];
-	nb_resultats: esinum;
+	nb_resultats: number;
 	avis_federes: "1";
-	numero_premier_resultat: esinum;
+	numero_premier_resultat: number;
 }
 
 export interface Query {

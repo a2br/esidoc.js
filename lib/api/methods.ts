@@ -1,10 +1,11 @@
 import fetch from "node-fetch";
-import xml2js from "xml2js";
 import jwt_decode from "jwt-decode";
 import * as T from "./types";
 
 const url = (institution: string) =>
-	`${institution.toLowerCase() /* Not necessary, just safety */}.esidoc.fr`;
+	`https://${
+		institution.toLowerCase() /* Not necessary, just safety */
+	}.esidoc.fr`;
 
 export function tokenNeedsRefresh(token: string): boolean {
 	const decoded = jwt_decode(token);
@@ -16,20 +17,23 @@ export function tokenNeedsRefresh(token: string): boolean {
 // Get token
 export async function fetchToken(institution: string): Promise<string> {
 	const root = url(institution);
+	console.log(root);
 	const res = await fetch(root);
 	const txt = await res.text();
 
-	const tokenRegex = /(?<="Esidocpublictoken", ?")(.*)+?(?="\);)/;
-	const noise = /\t|\r|\n/g;
+	const tokenRegex =
+		/(?<=sessionStorage.setItem\('Esidocpublictoken',")(.*)+?(?="\);)/;
+	const noise = /\t|\r|\n| /g;
 
-	const xml = await xml2js.parseStringPromise(txt);
-	const script: string = xml.html.head[0].script.find(
-		(e: Record<string, unknown> | string) =>
-			typeof e === "string" && e.includes("sessionStorage")
-	);
-	const token = script.replace(noise, "").match(tokenRegex);
+	const clean = txt.replace(noise, "");
+	const sessIndex = clean.indexOf("sessionStorage.setItem");
+	const startIndex =
+		sessIndex + "sessionStorage.setItem('Esidocpublictoken',\"".length;
+	const rest = clean.substr(startIndex);
+	const endIndex = rest.indexOf('");');
+	const token = rest.substring(0, endIndex);
 	if (!token) throw new Error("No token");
-	return token[0];
+	return token;
 }
 
 const getHeaders = (token: string) => ({
