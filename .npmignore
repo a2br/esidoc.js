@@ -3,3 +3,4 @@ lib
 .eslintrc.json
 .gitignore
 .prettierrc.json
+tsconfig.json
