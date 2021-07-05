@@ -1,5 +1,7 @@
 type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
 
+// Facettes
+
 export const allFacettes = [
 	"support_groupe",
 	"date_parution_annee",
@@ -15,6 +17,7 @@ export type FacetteSupportGroups = LiteralUnion<
 	"Livres" | "Revues, journaux, magazines" | "Sites internet" | "Vidéos"
 >;
 
+// Json Web Token
 export interface EsidocTokenPayload {
 	iss: "esidoc";
 	/**
@@ -39,6 +42,49 @@ export function isValidPayload(
 	);
 }
 
+// Info endpoint
+
+export interface InstitutionInfo {
+	titre: string;
+	"sous-titre": string;
+	"cms-public": boolean;
+	"site-etablissement": string;
+	reseausocial_pearltrees: string | null;
+	reseausocial_facebook: string | null;
+	reseausocial_instagram: string | null;
+	reseausocial_pinterest: string | null;
+	reseausocial_scoopit: string | null;
+	reseausocial_twitter: string | null;
+	reseausocial_youtube: string | null;
+	"marguerite-resultats": true;
+	"historique-notices": true;
+	"historique-recherches": true;
+	"partage-mail": true;
+	"partage-citations": true;
+	wikipedia: false;
+	avis: true;
+	avis_federes: true;
+	reservations: "aucun";
+	"catalogues-autres": null;
+	/**
+	 * @example "livresfiction_simple|livresfiction2_genre|livresdoc_dewey|revjourmag_alpha"
+	 */
+	"catalogues-guides": string;
+	/**
+	 * @example "support_groupe|date_parution_annee|auteurs|types_nature|emplacement"
+	 */
+	facettes: string;
+	/**
+	 * @example "6"
+	 */
+	"rss-limite": string;
+	/**
+	 * @example "1"
+	 */
+	"partage-reseauxsociaux": string;
+}
+
+// Search endpoint
 export interface Resultat {
 	notice_id: string;
 	contenu: {
@@ -148,14 +194,14 @@ export interface SearchReq {
 	numero_premier_resultat: number;
 }
 
-export interface Query {
-	query: string;
-	quantity: number;
-	startFrom: number;
-}
-
 export interface SearchRes {
 	facettes?: Record<Facette, [category: string, quantity: number][]>;
 	nb_resultats: number;
 	resultats: Resultat[];
+}
+// - High level
+export interface Query {
+	query: string;
+	quantity: number;
+	startFrom: number;
 }

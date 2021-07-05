@@ -70,6 +70,16 @@ export function buildQueryReq(query: T.Query): T.SearchReq {
 	return req;
 }
 
+export async function getInfo(institution: string): Promise<T.InstitutionInfo> {
+	const res = await fetch(
+		`https://api-administration.esidoc.fr/${
+			institution.toUpperCase() /* Just safety */
+		}/parametres/front`
+	);
+	const info: T.InstitutionInfo = await res.json();
+	return info;
+}
+
 export async function query(
 	req: T.SearchReq,
 	institution: string,

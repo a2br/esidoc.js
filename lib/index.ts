@@ -16,6 +16,11 @@ export class Esidoc {
 			return true;
 		} else return false;
 	}
+
+	async about(): Promise<T.InstitutionInfo> {
+		const res = await M.getInfo(this.institution);
+		return res;
+	}
 	async search(query: T.Query): Promise<T.SearchRes> {
 		await this._refreshToken();
 		// build req from query
