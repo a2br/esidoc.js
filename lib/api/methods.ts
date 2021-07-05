@@ -17,7 +17,6 @@ export function tokenNeedsRefresh(token: string): boolean {
 // Get token
 export async function fetchToken(institution: string): Promise<string> {
 	const root = url(institution);
-	console.log(root);
 	const res = await fetch(root);
 	const txt = await res.text();
 
