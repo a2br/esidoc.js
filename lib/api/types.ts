@@ -1,11 +1,15 @@
 type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
 
-export type Facette =
-	| "support_groupe"
-	| "date_parution_annee"
-	| "auteurs"
-	| "types_nature"
-	| "emplacement";
+export const allFacettes = [
+	"support_groupe",
+	"date_parution_annee",
+	"auteurs",
+	"types_nature",
+	"emplacement",
+] as const;
+
+export type ElemOf<A extends readonly unknown[]> = A[number];
+export type Facette = ElemOf<typeof allFacettes>;
 
 export type strnum = `${number}`;
 export type esinum = number | strnum;

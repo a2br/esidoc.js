@@ -14,7 +14,7 @@ export function tokenNeedsRefresh(token: string): boolean {
 }
 
 // Get token
-export async function fetchToken(institution?: string): Promise<string> {
+export async function fetchToken(institution: string): Promise<string> {
 	const root = url(institution);
 	const res = await fetch(root);
 	const txt = await res.text();
@@ -49,6 +49,23 @@ const getHeaders = (token: string) => ({
 	Referer: "https://0570216a.esidoc.fr/",
 	"Accept-Language": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7",
 });
+
+export function buildQueryReq(query: T.Query): T.SearchReq {
+	const req: T.SearchReq = {
+		requete: [
+			{
+				critere: "tous",
+				valeur: query.query,
+				operateur: "ET",
+			},
+		],
+		facettes: T.allFacettes as any,
+		nb_resultats: query.quantity ?? 10,
+		avis_federes: "1",
+		numero_premier_resultat: query.startFrom ?? 1,
+	};
+	return req;
+}
 
 export async function query(
 	req: T.SearchReq,
