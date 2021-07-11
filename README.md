@@ -1,7 +1,7 @@
 # esidoc.js
 
 Simple JS client for Esidoc's private API.
-Probably just scratches the surface of what the API can do, but for now the 2 of the main features are there: search documents & get info about the school.
+Probably just scratches the surface of what the API can do, but for now 2 of the main features are there: search documents & get info about the school.
 
 ### Example
 
