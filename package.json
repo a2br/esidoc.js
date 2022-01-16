@@ -2,7 +2,7 @@
 	"name": "esidoc.js",
 	"version": "1.0.0",
 	"description": "Simple JS client for Esidoc's private API",
-	"main": "index.js",
+	"main": "dist/index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 0"
 	},
